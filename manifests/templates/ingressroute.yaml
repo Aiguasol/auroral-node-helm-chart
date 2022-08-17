@@ -1,0 +1,64 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ .Release.Name }}-node-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+    - {{ .Values.node_ingress_path }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ .Release.Name }}-helio-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+    - {{ .Values.helio_ingress_path }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: https-redirect
+spec:
+  redirectScheme:
+    permanent: true
+    scheme: https
+---
+# https://stackoverflow.com/questions/51697574/adding-trailing-slash-to-microservice-root-path-in-traefik-ingress
+# https://stackoverflow.com/a/71094495/5819113
+# auroral-agent docs live in /docs/ and not in /docs so we redirect
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ .Release.Name }}-agent-redirect-docs
+spec:
+  redirectRegex:
+    permanent: true
+    regex: "^https://{{ .Values.node_path }}/docs$"
+    replacement: "https://{{ .Values.node_path }}/docs/"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Release.Name }}-ingressroute
+spec:
+  entryPoints:
+  - https
+  routes:
+  - kind: Rule
+    match: Host(`{{ .Values.node_path }}`)
+    services:
+    - name: auroral-agent
+      port: {{ .Values.port }}
+    middlewares:
+    -  name: {{ .Release.Name }}-agent-redirect-docs
+  - kind: Rule
+    match: Host(`{{ .Values.node_path }}`) && PathPrefix(`{{ .Values.helio_ingress_path }}`)
+    services:
+    - name: helio
+      port: {{ .Values.helio_port }}
+    middlewares:
+    - name: {{ .Release.Name }}-helio-stripprefix
+  tls:
+    certResolver: default
