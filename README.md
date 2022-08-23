@@ -17,13 +17,13 @@ The manifests for the gateway is valid only for <https://github.com/AuroralH2020
    1. Debugging (passing `--dry-run` and `--debug`)
 
       ```shell
-      helm --kubeconfig ~/.kube/configs/yourkubeconfig -n auroral-node install auroral-node-chart ./manifests --debug --dry-run
+      helm --kubeconfig ~/.kube/configs/yourkubeconfig -f ./manifest/myvalues.yaml -n auroral-node install auroral-node-chart ./manifests --debug --dry-run
       ```
 
    1. Installing
 
       ```shell
-      helm --kubeconfig ~/.kube/configs/yourkubeconfig -n auroral-node install auroral-node-chart ./manifests
+      helm --kubeconfig ~/.kube/configs/yourkubeconfig -f ./manifest/myvalues.yaml -n auroral-node install auroral-node-chart ./manifests
       ```
 
    Check with `helm install -h` for help on this command or refer to the [documentation](https://helm.sh/docs/helm/helm_install/)
