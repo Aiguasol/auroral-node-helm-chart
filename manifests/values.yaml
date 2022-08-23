@@ -41,12 +41,6 @@ triplestore_port: 3030
 ## helio
 helio_port: 4567
 
-## ingressroute
-node_ingress_path: "/node"
-helio_ingress_path: "/helio"
-host_path: host.from.your.org
-node_path: node.from.your.org
-
 # for dockerhub login
 # https://helm.sh/docs/howto/charts_tips_and_tricks/#creating-image-pull-secrets
 imageCredentials: 
