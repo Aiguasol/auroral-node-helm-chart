@@ -2,7 +2,7 @@
 
 Helm chart for auroral node <https://github.com/AuroralH2020/auroral-node>
 
-This chart is valid only for <https://github.com/AuroralH2020/auroral-gateway>. A new release of the auroral-node is written in JS is available in <https://github.com/AuroralH2020/auroral-gateway-js> and its chart is in the roadmap.
+The manifests for the gateway is valid only for <https://github.com/AuroralH2020/auroral-gateway>. A new release of the auroral-node-gateway, written in JS, is available in <https://github.com/AuroralH2020/auroral-gateway-js>. An update of the chart is in the roadmap.
 
 ## Getting started
 
