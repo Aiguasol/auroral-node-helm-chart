@@ -1,6 +1,6 @@
 # auroral-node-helm-chart
 
-Helm chart for auroral node <https://github.com/AuroralH2020/auroral-node>
+Helm chart for auroral node <https://github.com/AuroralH2020/auroral-node> created with [`kompose`](https://kompose.io/user-guide/).
 
 The manifests for the gateway is valid only for <https://github.com/AuroralH2020/auroral-gateway>. A new release of the auroral-node-gateway, written in JS, is available in <https://github.com/AuroralH2020/auroral-gateway-js>. An update of the chart is in the roadmap.
 
