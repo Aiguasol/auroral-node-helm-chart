@@ -1,0 +1,11 @@
+{
+    "@context":{
+        "@version": 1.1,
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "provider": "https://auroral.iot.linkeddata.es/def/provider#",
+        "location": {
+            "@location":"provider:hasOrigin",
+            "@type":"xsd:string"
+        }
+    }
+}
