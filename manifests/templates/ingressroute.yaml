@@ -1,0 +1,69 @@
+############## MIDDLEWARES
+############ AURORAL AGENT
+# https://stackoverflow.com/questions/51697574/adding-trailing-slash-to-microservice-root-path-in-traefik-ingress
+# https://stackoverflow.com/a/71094495/5819113
+# auroral-agent docs live in /docs/ and not in /docs so we redirect
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ .Release.Name }}-agent-redirect-docs
+spec:
+  redirectRegex:
+    permanent: true
+    regex: "^https://{{ .Values.agent_path }}/docs$"
+    replacement: "https://{{ .Values.agent_path }}/docs/"
+---
+############# HELIO
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ .Release.Name }}-helio-stripprefix
+spec:
+  stripPrefix:
+    prefixes:
+    - {{ .Values.helio_ingress_path }}
+############# HELIO FRONT END
+# apiVersion: traefik.containo.us/v1alpha1
+# kind: Middleware
+# metadata:
+#   name: {{ .Release.Name }}-fe-helio-stripprefix
+# spec:
+#   stripPrefix:
+#     prefixes:
+#     - {{ .Values.fe_helio_ingres_path }}
+# ---
+################ INGRESROUTES
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Release.Name }}-ingressroute
+spec:
+  entryPoints:
+  - websecure
+  routes:
+######### AURORAL AGENT
+  - kind: Rule
+    match: Host(`{{ .Values.agent_path }}`)
+    services:
+    - name: proxy
+      port:  {{ .Values.external_port }}
+    middlewares:
+    -  name: {{ .Release.Name }}-agent-redirect-docs
+###### HELIO
+  - kind: Rule
+    match: Host(`{{ .Values.node_path }}`) && PathPrefix(`{{ .Values.helio_ingress_path }}`)
+    services:
+    - name: helio
+      port: {{ .Values.helio_port }}
+    middlewares:
+    - name: {{ .Release.Name }}-helio-stripprefix
+  ###### HELIO FRONT END
+  - kind: Rule
+    match: Host(`{{ .Values.node_path }}`)
+    services:
+    - name: frontend
+      port: {{ .Values.fe_helio_port }}
+    # middlewares:
+    # - name: {{ .Release.Name }}-fe-helio-stripprefix
+  tls:
+    certResolver: default

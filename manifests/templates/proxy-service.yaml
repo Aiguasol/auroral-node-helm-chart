@@ -10,9 +10,10 @@ metadata:
   name: proxy
 spec:
   ports:
-    - name: {{ .Values.proxy_port | quote }}
-      port: {{ .Values.proxy_port }}
+    - name: web-proxy #{{ .Values.external_port | quote }}
+      port: {{ .Values.external_port }}
       targetPort: {{ .Values.proxy_port }}
+      protocol: TCP
   selector:
     io.kompose.service: proxy
 status:

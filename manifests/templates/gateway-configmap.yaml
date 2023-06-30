@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-agent-config
+  name: {{ .Release.Name }}-gateway-config
 data:
     .env: |
         ADAPTER_HOST= {{ .Values.adapter_host | quote }}

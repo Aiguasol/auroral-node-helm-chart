@@ -1,10 +1,12 @@
 ## CONFIGURATION
-node_env: "prod"
+node_env: "production"
 ip: 0.0.0.0
 port: 4000
+
 # CHANGE IF RUNNING TWO NODES IN SAME MACHINE!
 external_port: 81
 proxy_port: 8080
+
 
 ## GATEWAY
 #### Replace GTW_HOST by localhost if local mode
@@ -13,16 +15,16 @@ gtw_port: 8181
 gtw_timeout: 10000
 
 #### Add your credentials below, obtain them in the Neighbourhood Manager
-gtw_id: <your_gtw_id>
-gtw_pwd: <your_gtw_pwd>
+gtw_id: "80496eea-fe31-4e4b-81b8-3f48dc7f4742"
+gtw_pwd: "boscatnode"
 
 ## Persistance
 #### Replace DB_HOST by localhost if local mode
 db_type:  'REDIS'
-db_password: <your_db_password>
+db_password: ''
 db_host: cache-db
 db_port: 6379
-db_cache_enabled: "true"
+db_cache_enabled: "true" #"true"
 db_cache_ttl: 60
 
 ## WoT repository
@@ -32,8 +34,24 @@ wot_port: 9000
 
 #### Modes ["dummy", "proxy"(default), "semantic"]
 adapter_mode: "semantic"
-adapter_host: "<your_adapter_host>"
-adapter_port: 443
+adapter_host: "https://agent.boscat.aiguasol.coop/" #"<your_adapter_host>"
+adapter_port: 443 #3001
+use_mapping: "true"
+
+semantic_odrl_enabled: "false"
+semantic_shacl_enabled: "false"
+xmpp_environment: "auroral"
+xmpp_service: "xmpp://xmpp.auroral.bavenir.eu:5222"
+xmpp_domain: "xmpp.auroral.bavenir.eu"
+xmpp_resource: AuroralNode
+
+### gateway
+nm_host: "https://auroral.bavenir.eu/api/gtw/v1/"
+gtw_token_ttl: 86400
+gtw_agent_host: http://auroral-agent
+gtw_agent_port: 4000
+gtw_agent_timeout: 10000
+event_settings_file: persistance/events.json
 
 ### triplestore
 triplestore_port: 3030
@@ -41,10 +59,21 @@ triplestore_port: 3030
 ## helio
 helio_port: 4567
 
+## front end helio
+fe_helio_mode: 'APP'
+fe_helio_host: https://boscat.aiguasol.coop/helio #http://helio:4567
+fe_helio_port: 4202
+fe_helio_ext_port: 80
+
+## ingress
+node_path: boscat.aiguasol.coop
+agent_path: agent.boscat.aiguasol.coop
+proxy_ingress_path: "/docs"
+helio_ingress_path: "/helio"
+fe_helio_ingres_path: "/fehelio"
+
 # for dockerhub login
 # https://helm.sh/docs/howto/charts_tips_and_tricks/#creating-image-pull-secrets
 imageCredentials: 
-  registry: quay.io
-  username: someone
-  password: sillyness
-  email: someone@host.com
+  registry:
+    auth: ewoJImF1dGhzIjogewoJCSJodHRwczovL2luZGV4LmRvY2tlci5pby92MS8iOiB7CgkJCSJhdXRoIjogIllXbG5kV0Z6YjJ3NlFXbG5kV0Z6YjJ3NU1XZG9NVFk9IgoJCX0KCX0KfQ==

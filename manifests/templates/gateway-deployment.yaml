@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: gateway
-          image: ghcr.io/auroralh2020/auroral-gateway:latest
+          image: ghcr.io/auroralh2020/auroral_gateway_js:latest
           ports:
             - containerPort: {{ .Values.gtw_port }}
               name: web
@@ -35,39 +35,48 @@ spec:
           volumeMounts:
             - name: aur-gateway
               mountPath: /gateway/persistance
+            - name: {{ .Release.Name }}-gateway-config-volume
+              mountPath: /gateway/.env
+              subPath: .env
       initContainers:
         # workaround for avoid mounting empty volumes, see
         # https://stackoverflow.com/a/67091257/5819113
         # https://stackoverflow.com/a/59979968/5819113
         - name: chown-backup-dir-hack
           image: busybox
-          command: ["sh", "-c", "chown -R 1001:1001 /data/gateway/persistance"]
+          command: ["sh", "-c", "chown -R 1000:1000 /data/gateway/persistance"]
           volumeMounts:
             - name: aur-gateway
               mountPath: /data/gateway/persistance
         - name: make-backup-dir
-          image: ghcr.io/auroralh2020/auroral-gateway:latest
-          command: ["cp", "-r", "/gateway/persistance", "/data/gateway/"]
+          image: ghcr.io/auroralh2020/auroral_gateway_js:latest
+          command: 
+            - "/bin/bash"
+            - "-c"
+            - "cp -r /gateway/persistance /data/gateway/" #command: ["cp", "-r", "/gateway/persistance", "/data/gateway/"]
           volumeMounts:
           - name: aur-gateway
             mountPath: /data/gateway/persistance
-        - name: launch-gateway-agid-fill
-          image: ghcr.io/auroralh2020/auroral-gateway:latest
-          command: 
-            - "/bin/bash"
-            - "-c"
-            - |
-              cd /gateway/persistance/config && ./fillAgid.sh {{ .Values.gtw_id }}
-          volumeMounts:
-          - name: aur-gateway
-            mountPath: /gateway/persistance
+          - name: {{ .Release.Name }}-gateway-config-volume
+            mountPath: /gateway/.env
+            subPath: .env
+        # - name: launch-gateway-agid-fill
+        #   image: ghcr.io/auroralh2020/auroral-gateway:latest
+        #   command: 
+        #     - "/bin/bash"
+        #     - "-c"
+        #     - |
+        #       cd /gateway/persistance/config && ./fillAgid.sh {{ .Values.gtw_id }}
+        #   volumeMounts:
+        #   - name: aur-gateway
+        #     mountPath: /gateway/persistance
         - name: launch-gateway-genkeys
-          image: ghcr.io/auroralh2020/auroral-gateway:latest
+          image: ghcr.io/auroralh2020/auroral_gateway_js:latest
           command: 
             - "/bin/bash"
             - "-c"
             - |
-                PUBKEY=/gateway/persistance/keystore/platform-pubkey.pem
+                PUBKEY=/gateway/persistance/keystore/gateway-pubkey.pem
                 if test -f "$PUBKEY";
                     then
                     echo "$PUBKEY exists."
@@ -75,7 +84,7 @@ spec:
                     echo "$PUBKEY does not exist. Generating new ones"
                     cd /gateway/persistance/keystore && ./genkeys.sh;
                 fi;
-                cat /gateway/persistance/keystore/platform-pubkey.pem
+                cat /gateway/persistance/keystore/gateway-pubkey.pem
           volumeMounts:
           - name: aur-gateway
             mountPath: /gateway/persistance
@@ -84,4 +93,7 @@ spec:
         - name: aur-gateway
           persistentVolumeClaim:
             claimName: aur-gateway
+        - name: {{ .Release.Name }}-gateway-config-volume
+          configMap:
+            name: {{ .Release.Name }}-gateway-config
 status: {}

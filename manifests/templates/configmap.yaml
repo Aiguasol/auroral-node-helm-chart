@@ -4,6 +4,7 @@ data:
   ADAPTER_HOST: {{ .Values.adapter_host | quote }}
   ADAPTER_MODE: {{ .Values.adapter_mode | quote }}
   ADAPTER_PORT: {{ .Values.adapter_port | quote }}
+  DB_PASSWORD: {{ .Values.db_password | quote }}
   DB_CACHE_ENABLED: {{ .Values.db_cache_enabled | quote }}
   DB_CACHE_TTL: {{ .Values.db_cache_ttl | quote }}
   DB_HOST: {{ .Values.db_host | quote }}
@@ -18,5 +19,23 @@ data:
   WOT_ENABLED: {{ .Values.wot_enabled | quote }}
   WOT_HOST: {{ .Values.wot_host | quote }}
   WOT_PORT: {{ .Values.wot_port | quote }}
+  NM_HOST: {{ .Values.nm_host | quote }}
+  GTW_ID: {{ .Values.gtw_id | quote }}
+  GTW_PWD: {{ .Values.gtw_pwd | quote }}
+  GTW_TOKEN_TTL: {{ .Values.gtw_token_ttl | quote }}
+  GTW_AGENT_HOST: {{ .Values.gtw_agent_host | quote }}
+  GTW_AGENT_PORT: {{ .Values.gtw_agent_port | quote }}
+  GTW_AGENT_TIMEOUT: {{ .Values.gtw_agent_timeout | quote }}
+  USE_MAPPING: {{ .Values.use_mapping | quote }}
+  SEMANTIC_ODRL_ENABLED: {{ .Values.semantic_odrl_enabled | quote }}
+  SEMANTIC_SHACL_ENABLED: {{ .Values.semantic_shacl_enabled | quote }}
+  EVENT_SETTINGS_FILE: {{ .Values.event_settings_file | quote }}
+  XMPP_ENVIRONMENT: {{ .Values.xmpp_environment | quote }}
+  XMPP_ENVIROMENT: {{ .Values.xmpp_environment | quote }}
+  XMPP_SERVICE: {{ .Values.xmpp_service | quote }}
+  XMPP_DOMAIN: {{ .Values.xmpp_domain | quote }}
+  XMPP_RESOURCE: {{ .Values.xmpp_resource | quote }}
+  HELIO_MODE: {{ .Values.fe_helio_mode | quote }}
+  HELIO_REST_HOST: {{ .Values.fe_helio_host | quote }}
 metadata:
   name: {{ .Release.Name }}-config

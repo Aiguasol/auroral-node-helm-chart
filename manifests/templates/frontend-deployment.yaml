@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -c
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: frontend
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -c
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/aur--default: "true"
+        io.kompose.service: frontend
+    spec:
+      containers:
+        - env:
+            - name: HELIO_MODE
+              value: {{ .Values.fe_helio_mode }} #APP
+            - name: HELIO_REST_HOST
+              value: {{ .Values.fe_helio_host }} #http://localhost:4567
+          image: emiliocrespoperan/helio-frontend:latest
+          name: frontend
+          ports:
+            - containerPort: {{ .Values.fe_helio_ext_port }}
+          resources: {}
+      restartPolicy: Always
+status: {}

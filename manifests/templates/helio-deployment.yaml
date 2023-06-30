@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: helio
-          image: aiguasol/boscapp-helio-rest:latest
+          image: acimmino/helio-rest:latest #aiguasol/boscapp-helio-rest:latest
           imagePullPolicy: "Always"
           resources: {}
           ports:

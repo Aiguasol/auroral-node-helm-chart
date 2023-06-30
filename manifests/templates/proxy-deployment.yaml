@@ -28,6 +28,8 @@ spec:
           name: proxy
           ports:
             - containerPort: {{ .Values.proxy_port }}
+              name: web-proxy #{{ .Values.external_port | quote }}
+              protocol: TCP
           resources: {}
       restartPolicy: Always
 status: {}
