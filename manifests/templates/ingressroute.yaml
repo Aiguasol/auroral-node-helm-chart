@@ -22,6 +22,7 @@ spec:
   stripPrefix:
     prefixes:
     - {{ .Values.helio_ingress_path }}
+---
 ############# HELIO FRONT END
 # apiVersion: traefik.containo.us/v1alpha1
 # kind: Middleware
@@ -31,7 +32,7 @@ spec:
 #   stripPrefix:
 #     prefixes:
 #     - {{ .Values.fe_helio_ingres_path }}
-# ---
+---
 ################ INGRESROUTES
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
