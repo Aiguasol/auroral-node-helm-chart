@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 name: node-montseny
+=======
+name: node-map
+>>>>>>> 69c8107efad9f31459b51608f0a8f923bc910a39
 description: A generated Helm Chart for docker-compose from Skippbox Kompose
 version: 0.0.1
 apiVersion: v1

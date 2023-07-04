@@ -15,8 +15,13 @@ gtw_port: 8181
 gtw_timeout: 10000
 
 #### Add your credentials below, obtain them in the Neighbourhood Manager
+<<<<<<< HEAD
 gtw_id: "9da133f2-211a-4d85-81b5-df319cc1a184"
 gtw_pwd: "montsenynode"
+=======
+gtw_id: "b877d363-8d4f-4ba6-b408-92f5d4354b7b"
+gtw_pwd: "mapnode"
+>>>>>>> 69c8107efad9f31459b51608f0a8f923bc910a39
 
 ## Persistance
 #### Replace DB_HOST by localhost if local mode
@@ -34,7 +39,11 @@ wot_port: 9000
 
 #### Modes ["dummy", "proxy"(default), "semantic"]
 adapter_mode: "semantic"
+<<<<<<< HEAD
 adapter_host: "https://agent.montseny.aiguasol.coop/" #"<your_adapter_host>"
+=======
+adapter_host: "https://agent.map.aiguasol.coop/" #"<your_adapter_host>"
+>>>>>>> 69c8107efad9f31459b51608f0a8f923bc910a39
 adapter_port: 443 #3001
 use_mapping: "true"
 
@@ -61,13 +70,22 @@ helio_port: 4567
 
 ## front end helio
 fe_helio_mode: 'APP'
+<<<<<<< HEAD
 fe_helio_host: https://montseny.aiguasol.coop/helio #http://helio:4567
+=======
+fe_helio_host: https://map.aiguasol.coop/helio #http://helio:4567
+>>>>>>> 69c8107efad9f31459b51608f0a8f923bc910a39
 fe_helio_port: 4202
 fe_helio_ext_port: 80
 
 ## ingress
+<<<<<<< HEAD
 node_path: montseny.aiguasol.coop
 agent_path: agent.montseny.aiguasol.coop
+=======
+node_path: map.aiguasol.coop
+agent_path: agent.map.aiguasol.coop
+>>>>>>> 69c8107efad9f31459b51608f0a8f923bc910a39
 proxy_ingress_path: "/docs"
 helio_ingress_path: "/helio"
 fe_helio_ingres_path: "/fehelio"
