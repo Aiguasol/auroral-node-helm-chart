@@ -15,8 +15,8 @@ gtw_port: 8181
 gtw_timeout: 10000
 
 #### Add your credentials below, obtain them in the Neighbourhood Manager
-gtw_id: "80496eea-fe31-4e4b-81b8-3f48dc7f4742"
-gtw_pwd: "boscatnode"
+gtw_id: "b877d363-8d4f-4ba6-b408-92f5d4354b7b"
+gtw_pwd: "mapnode"
 
 ## Persistance
 #### Replace DB_HOST by localhost if local mode
@@ -34,7 +34,7 @@ wot_port: 9000
 
 #### Modes ["dummy", "proxy"(default), "semantic"]
 adapter_mode: "semantic"
-adapter_host: "https://agent.boscat.aiguasol.coop/" #"<your_adapter_host>"
+adapter_host: "https://agent.map.aiguasol.coop/" #"<your_adapter_host>"
 adapter_port: 443 #3001
 use_mapping: "true"
 
@@ -61,13 +61,13 @@ helio_port: 4567
 
 ## front end helio
 fe_helio_mode: 'APP'
-fe_helio_host: https://boscat.aiguasol.coop/helio #http://helio:4567
+fe_helio_host: https://map.aiguasol.coop/helio #http://helio:4567
 fe_helio_port: 4202
 fe_helio_ext_port: 80
 
 ## ingress
-node_path: boscat.aiguasol.coop
-agent_path: agent.boscat.aiguasol.coop
+node_path: map.aiguasol.coop
+agent_path: agent.map.aiguasol.coop
 proxy_ingress_path: "/docs"
 helio_ingress_path: "/helio"
 fe_helio_ingres_path: "/fehelio"
