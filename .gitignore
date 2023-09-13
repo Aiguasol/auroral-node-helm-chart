@@ -3,6 +3,13 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+
+.env
+manifests\.env
+values.yaml
+manifests\values.yaml
+.\manifests\values.yaml
+
 # User-specific files
 *.rsuser
 *.suo
